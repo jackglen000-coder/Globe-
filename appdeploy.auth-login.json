@@ -1,0 +1,14 @@
+{
+  "methods": ["google", "apple", "x"],
+  "headline": "GlobalRise Investor Account",
+  "subtitle": "Create or access your secure investor account",
+  "style": {
+    "mode": "light",
+    "accentColor": "#a17a32",
+    "backgroundColor": "#f7f9fc",
+    "panelColor": "#ffffff",
+    "textColor": "#142033",
+    "fontFamily": "Inter, system-ui, sans-serif",
+    "borderRadius": 12
+  }
+}
