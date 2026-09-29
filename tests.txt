@@ -1,0 +1,56 @@
+# Tests
+
+## Test 1 - Investor signup notification and admin email test [sanity]
+Viewport: desktop
+Covers: authenticated investor profile creation, admin notification email, protected admin email-test route
+Description: Verifies a newly completed investor profile triggers the configured admin notification and the admin can send a live test email to the configured admin inbox.
+
+Steps:
+1. Sign in as a new investor and complete the investor profile with a valid name, country, and investment plan
+2. Sign in as the configured admin account and open Admin approvals
+3. Select Send test email
+
+Expected: The investor profile is saved, the admin approvals area is accessible only to the configured admin, and the email test reports that a message was sent to the configured admin inbox.
+
+## Test 2 - Deposit request creates an admin-review item and sends notification
+Viewport: desktop
+Covers: deposit request creation, persisted request state, admin request review, deposit notification email
+Description: Verifies a valid deposit request is persisted as Pending and is visible to the admin for approval or rejection.
+
+Setup:
+1. Sign in as an investor with a completed profile
+
+Steps:
+1. Submit a valid deposit request with a positive amount and reference
+2. Open the investor dashboard and confirm the request is Pending
+3. Sign in as the configured admin and open Admin approvals
+4. Approve the deposit request
+
+Expected: The request remains visible to the investor as Approved after refresh, and the system attempts the investor decision email.
+
+## Test 3 - Withdrawal request and rejection workflow
+Viewport: mobile
+Covers: withdrawal request creation, mobile request form, admin rejection, investor status visibility
+Description: Verifies an investor can submit a withdrawal request on mobile and the admin can reject it with the rejection status preserved.
+
+Setup:
+1. Sign in as an investor with a completed profile
+
+Steps:
+1. Submit a valid withdrawal request with a positive amount
+2. Confirm it appears in the investor dashboard as Pending
+3. Sign in as the configured admin and reject the withdrawal request
+4. Return to the investor dashboard
+
+Expected: The withdrawal request is displayed as Rejected and the investor can see the decision status.
+
+## Test 4 - Email configuration failure is surfaced without exposing the API key
+Viewport: desktop
+Covers: Resend configuration guardrail, protected admin email-test endpoint, safe error messaging
+Description: Verifies the admin email test does not expose secret values and surfaces a useful configuration error when the Resend secret is unavailable.
+
+Steps:
+1. Open Admin approvals while signed in as the configured admin
+2. Select Send test email
+
+Expected: Either a sent confirmation is shown, or a safe Resend/configuration error is shown; no API key or secret value is displayed.
